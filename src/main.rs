@@ -15,7 +15,7 @@ struct Cli {
 fn main() -> Result<()> {
     let args = Cli::parse();
 
-    let file = File::open(&args.path.as_path()).context("could not read file")?;
+    let file = File::open(args.path.as_path()).context("could not read file")?;
     let mut content = BufReader::new(file);
     let mut content_str = String::new();
 

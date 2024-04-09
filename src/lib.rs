@@ -12,11 +12,12 @@ pub fn find_matches<O: Write>(pattern: &str, content: &str, o: &mut O) -> Result
         if line.contains(pattern) {
             is_match = true;
             writeln!(o, "{}", line).context("could not write to specified output")?;
+            o.flush().context("couldn't flush the output properly")?;
         }
     }
 
     if is_match.eq(&false) {
-        writeln!(o, "{}", "no match found").context("counld not write to specified output")?;
+        writeln!(o, "no match found").context("counld not write to specified output")?;
     }
 
     Ok(())
